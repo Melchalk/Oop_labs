@@ -20,7 +20,10 @@ internal class Student
         foreach (var exam in exams)
         {
             if (_testBook.Contains(exam) || exam.title == null || exam.assessment == 0)
+            {
                 continue;
+            }
+
             _testBook.Add(exam);
         }
     }
@@ -32,6 +35,7 @@ internal class Student
             if (_testBook[indexExam].title == exam.title)
             {
                 _testBook[indexExam] = exam;
+
                 break;
             }
         }
@@ -39,27 +43,35 @@ internal class Student
 
     public Student Copy()
     {
-        Student student = new Student(_name, _group);
+        Student student = new(_name, _group);
         student.NewExams(_testBook.ToArray());
+
         return student;
     }
 
     public Student Copy(string change)
     {
         Student student;
-        //provided that the group number is arranged in the same way as in the Moscow Polytechnic
-        if (char.IsDigit(change[0]))
+
+        if (char.IsDigit(change[0])) //при условии, что номер группы оформлен так же, как в Московском политехе
+        {
             student = new Student(_name, change);
+        }
         else
+        {
             student = new Student(change, _group);
+        }
+
         student.NewExams(_testBook.ToArray());
+
         return student;
     }
 
     public Student Copy(List<Exam> exams)
     {
-        Student student = new Student(_name, _group);
+        Student student = new(_name, _group);
         student.NewExams(exams.ToArray());
+
         return student;
     }
 
@@ -74,11 +86,14 @@ internal class Student
     public string InfoOfExams()
     {
         StringBuilder exams = new StringBuilder();
+
         exams.AppendLine($"Student's test book {_name}");
+
         foreach (var exam in _testBook)
         {
             exams.AppendLine($"{exam.title}\t{exam.assessment}");
         }
+
         return exams.ToString();
     }
 }
