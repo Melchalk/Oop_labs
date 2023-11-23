@@ -6,14 +6,14 @@ internal class University
 
     public void AddStudent(Student newStudent)
     {
-        ;
         students.Add(newStudent.GetStudentId(), newStudent);
     }
 
-    public void RemoveStudent(Student student)
+    public bool RemoveStudent(Student student)
     {
         int id = students.FirstOrDefault(x => x.Value == student).Key;
-        students.Remove(id);
+
+        return students.Remove(id);
     }
 
     public int FindStudent(Student student)

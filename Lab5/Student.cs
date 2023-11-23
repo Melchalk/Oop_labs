@@ -1,32 +1,29 @@
-﻿using System.Security.Cryptography;
-using System.Xml.Linq;
-
-namespace oop5;
+﻿namespace oop5;
 
 internal class Student : Human
 {
-    double averageScore;
+    double _averageScore;
     readonly int studentID;
 
     public double AverageScore
     {
         get
         {
-            return averageScore;
+            return _averageScore;
         }
         set
         {
             if (value < 0)
             {
-                averageScore = 0;
+                throw new ArgumentException("Average score must be positive");
             }
             else if (value > 5)
             {
-                averageScore = 5;
+                throw new ArgumentException("Average score must be less than 5");
             }
             else
             {
-                averageScore = value;
+                _averageScore = value;
             }
         }
     }

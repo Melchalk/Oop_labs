@@ -2,7 +2,7 @@
 
 internal class Human
 {
-    static int commonID = 0;
+    static int commonID = 0; //условие лабораторной
     Name _fullname;
     DateOnly _birthday;
     int _id;

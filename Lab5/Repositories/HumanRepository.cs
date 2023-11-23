@@ -6,14 +6,14 @@ internal static class HumanRepository
 
     public static string GetInfo(int id)
     {
-        if (!_repository.ContainsKey(id))
+        if (!_repository.TryGetValue(id, out Human? human))
             return "Ошибка";
 
-        Name name = _repository[id].Fullname;
+        Name name = human.Fullname;
 
         return $"Информация о человеке с Id - {id}\n" +
-            $"ФИО - {name.LastName} {name.FirstName} {name.Patronymic}\n" +
-            $"День рождения - {_repository[id].Birthday}\n";
+            $"ФИО - {name.LastName} {name.FirstName} {name.MiddleName}\n" +
+            $"День рождения - {human.Birthday}\n";
     }
 
     public static void AddHuman(Human human)
