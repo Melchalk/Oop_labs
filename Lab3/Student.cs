@@ -47,7 +47,7 @@ internal class Student
         {
             if (value < 0)
             {
-                _age = 0; //выносить ошибку
+                throw new ArgumentException("Age must be positive");
             }
             else
             {
@@ -65,11 +65,11 @@ internal class Student
         {
             if (value < 0)
             {
-                _averageScore = 0; //выносить ошибку
+                throw new ArgumentException("Average score must be positive");
             }
             else if (value > 5)
             {
-                _averageScore = 5; //выносить ошибку
+                throw new ArgumentException("Average score must be less than 5");
             }
             else
             {

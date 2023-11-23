@@ -10,8 +10,18 @@ static internal class StudentsRepository
     public static void Save(List<Student> students)
     {
         StringBuilder stringBuilder = new();
-        foreach (Student student in students)
-            stringBuilder.Append($"{student.Name}\n{student.LastName}\n{student.Age}\n{student.AverageScore}\n");
+
+        for (int indexStudent = 0; indexStudent < students.Count; indexStudent++)
+        {
+            Student student = students[indexStudent];
+
+            stringBuilder.Append($"{student.Name}\t{student.LastName}\t{student.Age}\t{student.AverageScore}");
+
+            if (indexStudent != students.Count - 1)
+            {
+                stringBuilder.Append('\n');
+            }
+        }
 
         File.WriteAllText(_file, stringBuilder.ToString());
     }
@@ -21,14 +31,16 @@ static internal class StudentsRepository
         List<Student> students = new();
         var listOfStudent = File.ReadAllText(_file).Split('\n');
 
-        //переделать считывание
 
-        for (int i = 0; i < listOfStudent.Length - 1; i += 4)
+        for (int i = 0; i < listOfStudent.Length; i += 1)
         {
-            Student student = new(listOfStudent[i], listOfStudent[i + 1], int.Parse(listOfStudent[i + 2]))
+            var infoStudent = listOfStudent[i].Split('\t');
+
+            Student student = new(infoStudent[0], infoStudent[1], int.Parse(infoStudent[2]))
             {
-                AverageScore = double.Parse(listOfStudent[i + 3])
+                AverageScore = double.Parse(infoStudent[3])
             };
+
             students.Add(student);
         }
 

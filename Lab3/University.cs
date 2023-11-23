@@ -6,11 +6,11 @@ internal class University
 
     public void AddStudent(Student newStudent)
     {
-        students.Add(newStudent); //если студент уже есть
+        students.Add(newStudent); 
     }
-    public void RemoveStudent(Student newStudent)
+    public bool RemoveStudent(Student newStudent)
     {
-        students.Remove(newStudent); //возвращение если студента нет
+        return students.Remove(newStudent);
     }
     public int FindStudent(Student student)
     {
